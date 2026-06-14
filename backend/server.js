@@ -37,3 +37,4 @@ app.get('/test-db', async (req, res) => {
 app.listen(PORT, () => {
     console.log(`Server is blasting off on port ${PORT} 🚀`);
 });
+
