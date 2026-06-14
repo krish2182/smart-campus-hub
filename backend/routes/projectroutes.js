@@ -2,7 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const projectController = require('../controllers/projectcontroller');
-const auth = require('../middleware/authMiddleware'); // Security guard
+const auth = require('../middleware/authmiddleware'); // Security guard
 
 // Student Route (Protected: Requires a valid token)
 router.post('/create', auth, projectController.createProject);
