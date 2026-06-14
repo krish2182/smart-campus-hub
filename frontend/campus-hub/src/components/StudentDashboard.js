@@ -19,7 +19,7 @@ function StudentDashboard() {
             const token = localStorage.getItem('token');
             const payload = { title, description, tech_stack: techStack, academic_year: academicYear, guide_id: parseInt(guideId) };
 
-            await axios.post('http://localhost:5000/api/projects/create', payload, {
+            await axios.post('https://smart-campus-backend.onrender.com/api/projects/create', payload, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
 

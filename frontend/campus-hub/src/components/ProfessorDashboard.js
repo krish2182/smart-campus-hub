@@ -14,7 +14,7 @@ function ProfessorDashboard() {
     const fetchQueue = async () => {
         try {
             const token = localStorage.getItem('token');
-            const response = await axios.get('http://localhost:5000/api/projects/faculty-queue', {
+            const response = await axios.get('https://smart-campus-backend.onrender.com/api/projects/faculty-queue', {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             setProjects(response.data);
