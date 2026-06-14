@@ -1,7 +1,7 @@
 // backend/routes/authRoutes.js
 const express = require('express');
 const router = express.Router();
-const authController = require('../controllers/authController');
+const authController = require('../controllers/authcontroller');
 
 // Route for registration: POST /api/auth/register
 router.post('/register', authController.register);

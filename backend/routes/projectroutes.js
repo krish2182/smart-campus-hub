@@ -1,7 +1,7 @@
 // backend/routes/projectRoutes.js
 const express = require('express');
 const router = express.Router();
-const projectController = require('../controllers/projectController');
+const projectController = require('../controllers/projectcontroller');
 const auth = require('../middleware/authMiddleware'); // Security guard
 
 // Student Route (Protected: Requires a valid token)
