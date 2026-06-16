@@ -8,7 +8,6 @@ async function seedDatabase() {
     
     try {
         // 1. Clear existing data to prevent duplicate email crashes
-        // We disable foreign key checks temporarily so we can clear tables cleanly
         await db.query('SET FOREIGN_KEY_CHECKS = 0');
         await db.query('TRUNCATE TABLE project_members');
         await db.query('TRUNCATE TABLE projects');
@@ -16,7 +15,7 @@ async function seedDatabase() {
         await db.query('SET FOREIGN_KEY_CHECKS = 1');
         console.log('🧼 Existing database tables cleared successfully.');
 
-        // Pre-generate a unified safe password hash for all mock accounts to speed up execution
+        // Pre-generate a unified safe password hash for all mock accounts
         const salt = await bcrypt.genSalt(10);
         const defaultPasswordHash = await bcrypt.hash('password123', salt);
         
@@ -50,7 +49,6 @@ async function seedDatabase() {
 
         for (let i = 1; i <= 100; i++) {
             const name = faker.person.fullName();
-            // Generate clean unique emails
             const email = `${name.toLowerCase().replace(/[^a-z]/g, '')}${i}@student.com`;
             const department = departments[Math.floor(Math.random() * departments.length)];
 
@@ -62,7 +60,7 @@ async function seedDatabase() {
         }
 
         // ==========================================
-        // 4. OPTIONAL: SEED 30 MOCK PROJECTS
+        // 4. SEED 30 MOCK PROJECTS
         // ==========================================
         console.log('📁 Populating 30 mock project submission records...');
         const projectTemplates = [
@@ -79,15 +77,13 @@ async function seedDatabase() {
             const description = faker.lorem.paragraph();
             const status = ['pending', 'approved', 'changes_requested'][Math.floor(Math.random() * 3)];
             const guideId = professorIds[Math.floor(Math.random() * professorIds.length)];
-            const studentId = studentIds[i]; // Assign distinct student creators
+            const studentId = studentIds[i];
 
-            // Insert Project
             const [projResult] = await db.query(
                 'INSERT INTO projects (title, description, tech_stack, status, academic_year, guide_id) VALUES (?, ?, ?, ?, ?, ?)',
                 [title, description, template.tech, status, 2026, guideId]
             );
 
-            // Map creator to the project members bridge table
             await db.query(
                 'INSERT INTO project_members (project_id, student_id) VALUES (?, ?)',
                 [projResult.insertId, studentId]
@@ -98,10 +94,8 @@ async function seedDatabase() {
     } catch (error) {
         console.error('❌ Database seeding execution failed:', error);
     } finally {
-        // Exit process cleanly
         process.exit();
     }
 }
 
-// Execute the function script
 seedDatabase();

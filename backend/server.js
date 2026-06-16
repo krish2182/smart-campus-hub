@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-// Import Routes (Strict Lowercase Paths to Match Linux File System)
+// Import Routes (Strict Lowercase Paths to Match Linux Case-Sensitivity)
 const authRoutes = require('./routes/authroutes');
 const projectRoutes = require('./routes/projectroutes'); 
 

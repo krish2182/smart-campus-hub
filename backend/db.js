@@ -14,10 +14,10 @@ const pool = mysql.createPool({
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0,
-    connectTimeout: 20000, // Boost timeout window to 20 seconds for cloud routing
+    connectTimeout: 20000, // Elevated timeout for cloud network routing latency
     acquireTimeout: 20000,
     
-    // Crucial for secure cloud handshakes
+    // Crucial for secure cloud-to-cloud handshakes
     ssl: {
         rejectUnauthorized: false
     }

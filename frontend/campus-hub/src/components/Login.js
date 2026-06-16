@@ -16,7 +16,7 @@ function Login({ onLoginSuccess, onSwitchToRegister }) {
 
         try {
             // Hit our Node.js Backend API login endpoint
-            const response = await axios.post('https://smart-campus-backend.onrender.com/api/auth/login', {
+            const response = await axios.post('http://localhost:5000/api/auth/login', {
                 email,
                 password
             });

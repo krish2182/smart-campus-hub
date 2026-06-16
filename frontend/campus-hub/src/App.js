@@ -1,7 +1,7 @@
 // frontend/src/App.js
 import React, { useState, useEffect } from 'react';
 import Login from './components/Login';
-import Register from './components/Register'; // <-- Import the new Register Component
+import Register from './components/Register'; // <-- Import the Register Component
 import StudentDashboard from './components/StudentDashboard';
 import ProfessorDashboard from './components/ProfessorDashboard';
 import Swal from 'sweetalert2';
@@ -43,7 +43,7 @@ function App() {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
         setUser(null);
-        setAuthMode('login'); // Reset state
+        setAuthMode('login'); // Reset back to login screen on logout
         Swal.fire({ icon: 'success', title: 'Logged Out', timer: 1500, showConfirmButton: false });
       }
     });
@@ -74,11 +74,11 @@ function App() {
           authMode === 'login' ? (
             <Login 
               onLoginSuccess={handleLoginSuccess} 
-              onSwitchToRegister={() => setAuthMode('register')} 
+              onSwitchToRegister={() => setAuthMode('register')} // <-- This handles the link click!
             />
           ) : (
             <Register 
-              onSwitchToLogin={() => setAuthMode('login')} 
+              onSwitchToLogin={() => setAuthMode('login')} // <-- This handles going back!
             />
           )
         ) : user.role === 'student' ? (
